@@ -9,12 +9,14 @@ import (
 )
 
 func averageCalc(num []int) int {
-	var sum float64
+	var sum int
 	for i := 0; i < len(num); i++ {
-		sum += float64(num[i])
+		sum += num[i]
 	}
-	average := float64(sum) / float64((len(num)))
-
+	if sum % 2 != 0 {
+		sum++
+	}
+	average := float64(sum)/float64(len(num))
 	return int(math.Round(average))
 }
 
@@ -43,10 +45,8 @@ func summ(num []int) int {
 }
 
 func variancer(num []int) int {
-	mean := summ(num) / len(num)
-
+	mean := averageCalc(num)
 	sqDifference := 0
-
 	for i := 0; i < len(num); i++ {
 		sqDifference += (num[i] - mean) * (num[i] - mean)
 	}
@@ -68,19 +68,11 @@ func main() {
 			number, _ := strconv.Atoi(numList[j])
 			intArray = append(intArray, number)
 		}
-		// fmt.Println("----------------------------------")
-		// fmt.Println(intArray)
-		// fmt.Println("----------------------------------")
-		// fmt.Println(intArray)
-		fmt.Println("----------------------------------")
+		fmt.Println("--------------------------------")
 		fmt.Println("Average: ", averageCalc(intArray))
-		fmt.Println("----------------------------------")
 		fmt.Println("Median: ", medianCalc(intArray))
-		fmt.Println("----------------------------------")
 		fmt.Println("Variance: ", variancer(intArray))
-		fmt.Println("----------------------------------")
 		fmt.Println("Standard Deviation: ", standardDeviation(intArray))
-		fmt.Println("----------------------------------")
 	} else {
 		fmt.Println("File not found or too many added")
 		return
